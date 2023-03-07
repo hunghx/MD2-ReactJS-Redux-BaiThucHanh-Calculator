@@ -3,26 +3,35 @@ import React, { Component } from "react";
 export default class App extends Component {
   constructor(props) {
     super(props);
-    //Khởi tạo 1 state là count có giá trị khởi tạo là 1
+    //Khởi tạo 1 state là textInput có giá trị khởi tạo là "" để lưu giá trị người dùng nhập từ ô input
     this.state = {
-      count: 0,
+      textInput: "",
     };
     // Khai báo phương thức để sử dụng từ khoá this
-    this.handleCount = this.handleCount.bind(this);
+    this.handleChangeInputValue = this.handleChangeInputValue.bind(this);
+    this.handleSubmitForm = this.handleSubmitForm.bind(this);
   }
-  //Khai báo 1 hàm handleCount để mỗi khi click vào button sẽ gọi hàm này và cập nhật lại count
-  handleCount() {
+  // khởi tạo phương thức để cập nhật giá trị người dùng nhập vào ô input vào lưu vào biến textInput
+  handleChangeInputValue(event) {
     this.setState({
-      count: this.state.count + 1,
+      textInput: event.target.value,
     });
+  }
+  // Khởi tạo phương thức thức khi có sự kiện submit form
+  handleSubmitForm(event) {
+    event.preventDefault();
+    alert("Bạn vừa nhập : '" + this.state.textInput + "'");
   }
   render() {
     return (
       <div>
-        {/* Hiển thị số lần bấm */}
-        <p>Số lần bấm của bạn là : {this.state.count}</p>
-        {/* Gắn sự kiện click button thì gọi hàm handleCount*/}
-        <button onClick={this.handleCount}>Click</button>
+        <form onSubmit={this.handleSubmitForm}>
+          <input
+            value={this.state.textInput}
+            onChange={this.handleChangeInputValue}
+          />
+          <button type="submit">Submit</button>
+        </form>
       </div>
     );
   }
