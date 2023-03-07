@@ -4,49 +4,44 @@ export default class App extends Component {
     super(props);
     //Khởi tạo các state
     this.state = {
-      color: "black",
-      isShow: true,
-      fontSize: 12,
-      content: "helo babi :v!",
+      number: "",
+      array: [],
+      total: 0,
     };
     // Khai báo phương thức để sử dụng từ khoá this
-    this.handleToggle = this.handleToggle.bind(this);
-    this.handleChangeBackground = this.handleChangeBackground.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChangeInput = this.handleChangeInput.bind(this);
   }
-  // Phương thức handleToggle sẽ thay đổi giá trị state isShow từ đó ẩn hiện các phần tử
-  handleToggle() {
+  //Khởi tạo phương thức quản lí sự thay đổi của ô input
+  handleChangeInput(event) {
     this.setState({
-      isShow: !this.state.isShow,
+      number: +event.target.value,
     });
   }
-  //Phương thức handleChangeBackground để thay đổi màu sắc với cỡ chữ của đoạn văn bản
-  handleChangeBackground() {
+  // khởi tạo phương thức khi submit form thì hiển thị kết quả
+  handleSubmit(event) {
+    event.preventDefault();
     this.setState({
-      color: this.state.color === "black" ? "pink" : "black",
-      fontSize: this.state.fontSize === 12 ? 14 : 12,
-      content:
-        this.state.content === "helo babi :v!"
-          ? "U look so beautiful, honey!"
-          : "helo babi :v!",
+      array: [...this.state.array, this.state.number],
+      total: this.state.total + this.state.number,
+      number: "",
     });
   }
   render() {
     return (
       <div>
-        {/*Sử dụng toán tử 3 ngôi để ẩn hiện đoạn văn và nút thay đổi định dạng của đoạn văn*/}
-        {this.state.isShow ? (
-          <>
-            <p
-              style={{ color: this.state.color, fontSize: this.state.fontSize }}
-            >
-              {this.state.content}
-            </p>
-            <button onClick={this.handleChangeBackground}>Change</button>
-          </>
-        ) : (
-          ""
-        )}
-        <button onClick={this.handleToggle}>Toggle</button>
+        <form onSubmit={this.handleSubmit}>
+          <input
+            type="number"
+            value={this.state.number}
+            onChange={this.handleChangeInput}
+          />
+          <button type="submit">Add</button>
+        </form>
+        <span>Kết quả:</span>
+        <div style={{ color: "red" }}>
+          {this.state.array.join("+") + "=" + this.state.total}
+        </div>
       </div>
     );
   }
