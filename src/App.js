@@ -6,6 +6,7 @@ export default class App extends Component {
     return (
       <div>
         {/* Button */}
+        {/*truyền 3 props với giá trị vào coponent button*/}
         <Button text="Click Me" color="red" background="blue" />
         {/* Button */}
       </div>
