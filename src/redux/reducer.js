@@ -1,29 +1,18 @@
 // khởi tạo giá tị cho state là 1 mảng danh sách sinh viên
-const initState = [
-  {
-    id: "SV001",
-    name: "Nguyễn Văn A",
-    age: 20,
-    sex: true,
-    class: "JAVA-11",
-  },
-  {
-    id: "SV002",
-    name: "Nguyễn Văn B",
-    age: 19,
-    sex: true,
-    class: "JAVA-11",
-  },
-  {
-    id: "SV003",
-    name: "Nguyễn Văn C",
-    age: 21,
-    sex: true,
-    class: "JAVA-10",
-  },
-];
+const initState = {
+  content: "",
+  color: "#000000",
+};
 // tạo reducer cho store
 const reducer = (state = initState, action) => {
-  return state;
+  switch (action.type) {
+    case "ONCHANGE":
+      // cập nhật lại state khi có sự thay đổi dữ liệu
+      state = { ...state, ...action.payload };
+      console.log(state);
+      return state;
+    default:
+      return state;
+  }
 };
 export default reducer;
