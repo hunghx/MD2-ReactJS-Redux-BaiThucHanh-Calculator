@@ -1,20 +1,13 @@
-import { CREATE, DELETE, UPDATE } from "./constants";
-
-export const create_new_work = (todo) => {
+import { DECREASE, INCREASE } from "./constants";
+// action để tăng giá trị
+export const increase = () => {
   return {
-    type: CREATE,
-    payload: todo,
+    type: INCREASE,
   };
 };
-export const delete_work = (idDelete) => {
+// action để giảm giá trị
+export const decrease = () => {
   return {
-    type: DELETE,
-    payload: idDelete,
-  };
-};
-export const update_work = (todoUpdate) => {
-  return {
-    type: UPDATE,
-    payload: todoUpdate,
+    type: DECREASE,
   };
 };
