@@ -1,33 +1,36 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import "./App.css";
-import { decrease, increase } from "./redux/action";
 export default function App() {
-  // sử dụng useSelector để lấy ra giá trị của state
-  let count = useSelector((state) => state);
-  // Khai báo 1 useDisatch để bắn action
-  const dispatch = useDispatch();
-  // hàm xử lí tăng
-  const handleIncrease = () => {
-    dispatch(increase());
-  };
+  // sử dụng useSelector để lấy ra danh sách sinh viên
+  let listStudent = useSelector((state) => state);
 
-  // hàm xử lí giảm
-  const handleDecrease = () => {
-    dispatch(decrease());
-  };
   return (
-    <div>
-      <h2 className="text-center mt-5">Ứng dụng đếm số</h2>
-      <div className="display d-flex justify-content-center align-items-center">
-        <button className="btn btn-warning" onClick={handleDecrease}>
-          <i class="bi bi-dash"></i>
-        </button>
-        <span>{count}</span>
-        <button className="btn btn-warning" onClick={handleIncrease}>
-          <i class="bi bi-plus"></i>
-        </button>
-      </div>
+    <div className="container">
+      <h2 className="text-center mt-5">Danh sách sinh viên</h2>
+      <table className="table">
+        <thead>
+          <tr>
+            <td>STT</td>
+            <td>Họ Tên</td>
+            <td>Tuổi</td>
+            <td>Giới tính</td>
+            <td>Lớp</td>
+          </tr>
+        </thead>
+        {/* dùng map để in ra danh sách các phần tử mảng */}
+        <tbody>
+          {listStudent.map((student, index) => (
+            <tr key={student.id}>
+              <td>{index + 1}</td>
+              <td>{student.name}</td>
+              <td>{student.age}</td>
+              <td>{student.sex ? "Nam" : "Nữ"}</td>
+              <td>{student.class}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

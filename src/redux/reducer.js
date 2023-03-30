@@ -1,21 +1,29 @@
-import { INCREASE, DECREASE } from "./constants";
-
-// khởi tạo giá tị cho state
-const initState = 10;
+// khởi tạo giá tị cho state là 1 mảng danh sách sinh viên
+const initState = [
+  {
+    id: "SV001",
+    name: "Nguyễn Văn A",
+    age: 20,
+    sex: true,
+    class: "JAVA-11",
+  },
+  {
+    id: "SV002",
+    name: "Nguyễn Văn B",
+    age: 19,
+    sex: true,
+    class: "JAVA-11",
+  },
+  {
+    id: "SV003",
+    name: "Nguyễn Văn C",
+    age: 21,
+    sex: true,
+    class: "JAVA-10",
+  },
+];
 // tạo reducer cho store
 const reducer = (state = initState, action) => {
-  switch (action.type) {
-    case INCREASE:
-      // tăng giá trị state
-      state = state + 1;
-      return state;
-    case DECREASE:
-      // giảm giá tị state
-      state = state - 1;
-      return state;
-    default:
-      return state;
-  }
+  return state;
 };
-
 export default reducer;
