@@ -1,21 +1,7 @@
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-li {
-  cursor: pointer;
-  padding: 10px;
-}
-
-.selected {
-  background-color: lightblue;
-}
-
-input {
-  margin-top: 10px;
-  padding: 5px;
-  border-radius: 5px;
-  border: 1px solid grey;
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
 }
