@@ -1,16 +1,21 @@
-// khởi tạo giá tị cho state là 1 mảng danh sách sinh viên
-const initState = {
-  content: "",
-  color: "#000000",
+import { CLOSE_MENU, OPEN_MENU, SEARCH, SELECT_MENU_ITEM } from "./actions";
+
+const initialState = {
+  isMenuOpen: false,
+  selectedMenuItem: null,
+  searchQuery: "",
 };
-// tạo reducer cho store
-const reducer = (state = initState, action) => {
+
+const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "ONCHANGE":
-      // cập nhật lại state khi có sự thay đổi dữ liệu
-      state = { ...state, ...action.payload };
-      console.log(state);
-      return state;
+    case OPEN_MENU:
+      return { ...state, isMenuOpen: true };
+    case CLOSE_MENU:
+      return { ...state, isMenuOpen: false };
+    case SELECT_MENU_ITEM:
+      return { ...state, selectedMenuItem: action.itemId };
+    case SEARCH:
+      return { ...state, searchQuery: action.query };
     default:
       return state;
   }

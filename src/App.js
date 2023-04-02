@@ -1,39 +1,61 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
+import { closeMenu, openMenu, search, selectMenuItem } from "./redux/actions";
 export default function App() {
-  // sử dụng useSelector để lấy ra danh sách sinh viên
-  let text = useSelector((state) => state);
-  let dispatch = useDispatch();
-  // tạo hàm onchange để xử lí khi có sự thay đổi dữ liệU của ô input
-  const onchangeState = (e) => {
-    let atrr = { [e.target.name]: e.target.value };
-    console.log(atrr);
-    dispatch({
-      type: "ONCHANGE",
-      payload: atrr,
-    });
+  const dispatch = useDispatch();
+  const isMenuOpen = useSelector((state) => state.isMenuOpen);
+  const selectedMenuItem = useSelector((state) => state.selectedMenuItem);
+  const searchQuery = useSelector((state) => state.searchQuery);
+
+  const handleMenuClick = () => {
+    if (isMenuOpen) {
+      dispatch(closeMenu());
+    } else {
+      dispatch(openMenu());
+    }
   };
+
+  const handleMenuItemClick = (itemId) => {
+    dispatch(selectMenuItem(itemId));
+  };
+
+  const handleSearch = (event) => {
+    dispatch(search(event.target.value));
+  };
+
   return (
-    <div className="container text-center">
-      <h2 className="text-center mt-5">Color Picker App</h2>
-      <div className="d-flex justify-content-center gap-2 mb-2">
-        <label>Color</label>
-        <input
-          type="color"
-          name="color"
-          style={{ width: "50px" }}
-          value={text.color}
-          onChange={(e) => onchangeState(e)}
-        />
-      </div>
-      <textarea
-        className="form-control"
-        name="content"
-        id="content"
-        style={{ height: 100, fontSize: 16, color: text.color }}
-        value={text.content}
-        onChange={(e) => onchangeState(e)}
+    <div>
+      <button onClick={handleMenuClick}>
+        {isMenuOpen ? "Close" : "Open"} Menu
+      </button>
+      {isMenuOpen && (
+        <ul>
+          <li
+            onClick={() => handleMenuItemClick(1)}
+            className={selectedMenuItem === 1 ? "selected" : ""}
+          >
+            Item 1
+          </li>
+          <li
+            onClick={() => handleMenuItemClick(2)}
+            className={selectedMenuItem === 2 ? "selected" : ""}
+          >
+            Item 2
+          </li>
+          <li
+            onClick={() => handleMenuItemClick(3)}
+            className={selectedMenuItem === 3 ? "selected" : ""}
+          >
+            Item 3
+          </li>
+        </ul>
+      )}
+      <input
+        type="text"
+        placeholder="search here ..."
+        value={searchQuery}
+        onChange={handleSearch}
       />
     </div>
   );
