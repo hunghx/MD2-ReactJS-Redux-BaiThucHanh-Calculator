@@ -1,4 +1,4 @@
 import { createStore } from "redux";
-import recordReducer from "./reducer";
+import { calculatorReducer } from "./reducer";
 
-export const store = createStore(recordReducer);
+export const store = createStore(calculatorReducer);

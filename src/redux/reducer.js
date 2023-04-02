@@ -1,13 +1,30 @@
 const initialState = {
-  records: [],
+  result: 0,
+  input: "",
 };
-
-export default function recordReducer(state = initialState, action) {
+export function calculatorReducer(state = initialState, action) {
   switch (action.type) {
-    case "ADD_RECORD":
+    case "ADD_NUMBER":
       return {
         ...state,
-        records: [...state.records, action.payload],
+        input: state.input + action.payload,
+      };
+    case "ADD_OPERATOR":
+      return {
+        ...state,
+        input: state.input + action.payload,
+      };
+    case "CLEAR_INPUT":
+      return {
+        ...state,
+        input: "",
+      };
+    case "CALCULATE_RESULT":
+      const result = eval(state.input);
+      return {
+        ...state,
+        input: result.toString(),
+        result,
       };
     default:
       return state;

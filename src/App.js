@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import Record from "./components/Record";
+import Calculator from "./components/Calculator";
 export default function App() {
-  return <Record />;
+  return <Calculator />;
 }
